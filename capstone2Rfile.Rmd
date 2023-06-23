@@ -1,0 +1,111 @@
+---
+title: "capstone2"
+Parma acharya
+June 2023
+---
+
+
+```{r}
+plot(cars)
+```
+
+```{r}
+library (tidyverse)
+
+```
+```{r}
+df <- read.csv("C:/Users/xende/Downloads/Top-Largest-Universities.csv") 
+df
+```
+
+#checking and cleaning up the data 
+```{r}
+df %>% summarize(na_count = sum(is.na(df)))
+colSums(is.na(df))
+```
+```{r}
+names(df)
+```
+# use ggplot for creating chart 
+```{r}
+ggplot(data = df,
+       mapping = aes(x = Rank,
+                     y =Location))+
+  # define 2 gemotrical 
+  geom_point(size = 5)+
+  geom_line(colour = "red")
+```
+```{r}
+#using pipe operater
+df%>%
+  ggplot(aes(Institution, Continent,
+             colours= Affiliation))+
+  geom_point(size = 2, alpha = 1)+
+  geom_smooth(method = lm, se = F)
+  facet_wrap(~Type)
+```
+```{r}
+df %>% 
+  ggplot(aes(Founded, Distance...In.Person))+
+  geom_boxplot()+
+  geom_point(alpha = 1, aes(size = Affiliation,
+                 colours = NULL))
+  theme_light()+
+  labs(title = 'Distance in person')
+```
+# creating Histograms
+```{r}
+df  %>%
+  ggplot(aes(Continent))+
+  geom_bar(fill = "#97B3C6")
+
+  theme_bw()+
+  labs(x = "Continent",
+       y = NULL,
+       title = "observation by Continent")
+```
+# CREATING barplot and colomn plot using R (ggplot)
+```{r}
+ggplot(df, aes(x = Location)) + geom_bar()
+  
+# used only one variable
+```
+# manipulationg with result
+```{r}
+ggplot(df, aes(x = Affiliation, fill = "red")) + geom_bar() #+ coord_flip()
+
+
+
+
+
+
+```
+# creating pie chart using ggplot
+```{r}
+#data to be used for the chart
+
+library(dplyr)
+```
+
+```{r}
+ # using the "Enrollment" column from df
+enrollment_values <- df$Enrollment
+
+# Plot the pie chart
+pie(enrollment_values, labels = df$Institution, main = "Enrollment Distribution")
+
+```
+```{r}
+#lbls <- c("Rank", "Institution", "Location", "Continent", "Founded", "Affiliation", "Distance...In.Person", "Enrollment" )
+#pie(df, labels = lbls, main="pie chart")
+```
+
+```
+```{r}
+
+
+```
+```{r}
+
+
+```
